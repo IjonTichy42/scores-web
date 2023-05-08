@@ -47,7 +47,7 @@ const PredictionsForm = ({fixtures}: {fixtures: Fixture[]}) => {
         })
         const data = await response.json()
         if (response.ok) {
-            router.push("/")
+            router.push("/predictions")
         } else {
             setError(data.detail)
         }

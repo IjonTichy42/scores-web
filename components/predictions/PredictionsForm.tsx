@@ -75,7 +75,7 @@ const PredictionsForm = ({fixtures}: {fixtures: Fixture[]}) => {
                         <td>
                             <input
                                 type="number"
-                                className="p-2 border-2 m-2 w-12 bg-white rounded-2xl text-center"
+                                className="p-2 border-2 m-2 w-12 bg-white dark:text-gray-800 rounded-2xl text-center"
                                 required
                                 onChange={(e) => {
                                     setPredictions(prevState => {
@@ -91,7 +91,7 @@ const PredictionsForm = ({fixtures}: {fixtures: Fixture[]}) => {
                         <td>
                             <input
                                 type="number"
-                                className="p-2 border-2 m-2 w-12 bg-white rounded-2xl text-center"
+                                className="p-2 border-2 m-2 w-12 bg-white dark:text-gray-800 rounded-2xl text-center"
                                 required
                                 onChange={(e) => {
                                     setPredictions(prevState => {
@@ -125,7 +125,7 @@ const PredictionsForm = ({fixtures}: {fixtures: Fixture[]}) => {
             <div>
                 <label>Код:</label>
                 <input
-                    className="p-2 border-2 m-2 w-40 bg-white rounded-2xl text-center"
+                    className="p-2 border-2 m-2 w-40 bg-white dark:text-gray-800 rounded-2xl text-center"
                     onChange={(e) => {
                         setCode(e.target.value)
                     }}
@@ -140,7 +140,7 @@ const PredictionsForm = ({fixtures}: {fixtures: Fixture[]}) => {
                 </div>
             }
             <div className="text-right">
-                <button className="p-4 bg-white rounded-2xl m-4 mr-0" type="submit" disabled={phase === 1}>
+                <button className="p-4 bg-white rounded-2xl dark:text-gray-800 m-4 mr-0" type="submit" disabled={phase === 1}>
                     Сохранить
                 </button>
             </div>

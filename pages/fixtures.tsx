@@ -62,7 +62,7 @@ function Fixtures(props: {prevFixtures: Fixture[], upcomingFixtures: Fixture[]})
             {!isAdding &&
                 <button
                     onClick={showForm}
-                    className="p-2 bg-white rounded-2xl m-2"
+                    className="p-2 bg-white dark:bg-gray-800 rounded-2xl m-2"
                 >
                     Добавить
                 </button>

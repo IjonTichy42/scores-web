@@ -6,7 +6,7 @@ function FixtureBlock(props: {fixture: Fixture}) {
     const {fixture} = props
 
     return (
-        <div key={fixture.id} className={styles.root + " bg-gray-200 rounded-md m-4 p-4 flex flex-col justify-center items-center"}>
+        <div key={fixture.id} className={styles.root + " bg-gray-200 dark:bg-gray-800 rounded-md m-4 p-4 flex flex-col justify-center items-center"}>
             <div>
                 {competitionMapper(fixture.competitionId)}
             </div>

@@ -3,25 +3,25 @@ import {Fixture} from "@/types/fixture";
 import {Prediction} from "@/types/prediction";
 
 const PredictionsTable = ({fixtures, predictions}: {fixtures: Fixture[], predictions: Prediction[]}) => (
-    <table className="border-2 border-black">
+    <table className="border-2 border-black dark:border-gray-300">
         <thead>
         <tr>
-            <th className="border-2 border-black w-60">
+            <th className="border-2 dark:border-gray-300 border-black w-60">
                 Турнир
             </th>
-            <th className="border-2 border-black w-40">
+            <th className="border-2 dark:border-gray-300 border-black w-40">
                 Дата
             </th>
-            <th className="border-2 border-black w-72">
+            <th className="border-2 dark:border-gray-300 border-black w-72">
                 Участники
             </th>
-            <th className="border-2 border-black w-40">
+            <th className="border-2 dark:border-gray-300 border-black w-40">
                 Ответный матч
             </th>
-            <th className="border-2 border-black w-96">
+            <th className="border-2 dark:border-gray-300 border-black w-96">
                 Прогнозы
             </th>
-            <th className="border-2 border-black w-72">
+            <th className="border-2 dark:border-gray-300 border-black w-72">
                 Результат
             </th>
         </tr>
@@ -30,19 +30,19 @@ const PredictionsTable = ({fixtures, predictions}: {fixtures: Fixture[], predict
         {
             fixtures.map((fixture) => (
                 <tr key={fixture.id}>
-                    <td className="border-2 border-black p-2">
+                    <td className="border-2 border-black dark:border-gray-300 p-2">
                         {competitionMapper(fixture.competitionId)}
                     </td>
-                    <td className="border-2 border-black p-2">
+                    <td className="border-2 border-black dark:border-gray-300 p-2">
                         {fixture.dateString}
                     </td>
-                    <td className="border-2 border-black p-2">
+                    <td className="border-2 border-black dark:border-gray-300 p-2">
                         {fixture.homeTeam}-{fixture.awayTeam}
                     </td>
-                    <td className="border-2 border-black p-2">
+                    <td className="border-2 border-black dark:border-gray-300 p-2">
                         {fixture.progressApplicable ? "Да" : "Нет"}
                     </td>
-                    <td className="border-2 border-black p-2">
+                    <td className="border-2 border-black dark:border-gray-300 p-2">
                         {predictions.filter(prediction => prediction.fixtureId === fixture.id).sort((a,b) => {
                             if (a.name > b.name) {
                                 return 1
@@ -57,7 +57,7 @@ const PredictionsTable = ({fixtures, predictions}: {fixtures: Fixture[], predict
                             </div>
                         ))}
                     </td>
-                    <td className="border-2 border-black p-2">
+                    <td className="border-2 border-black dark:border-gray-300 p-2">
                         {fixture.ftHomeScore ?
                             (<>{fixture.ftHomeScore}:{fixture.ftAwayScore} {fixture.progressApplicable && (fixture.homeProgress ? "проход " + fixture.homeTeam : "проход " + fixture.awayTeam)}</>) :
                             "-"

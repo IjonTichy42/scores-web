@@ -1,4 +1,6 @@
-function Home(props) {
+import {User} from "@/types/user";
+
+function Home(props: {users: User[]}) {
     const {users} = props
 
     return (
@@ -58,9 +60,9 @@ function Home(props) {
     )
 }
 
-export async function getStaticProps(context) {
+export async function getServerSideProps() {
     const response = await fetch(process.env.API_HOST + "/users")
-    const data = await response.json()
+    const data: {users: User[]} = await response.json()
 
     return {
         props: {

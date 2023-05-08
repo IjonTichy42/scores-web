@@ -1,16 +1,18 @@
 import {useState} from "react";
 import { useRouter } from "next/router";
+import {Fixture} from "@/types/fixture";
+import {ResultSave} from "@/types/result";
 
-const ResultsForm = ({fixtures}) => {
+const ResultsForm = ({fixtures}: {fixtures: Fixture[]}) => {
     const router = useRouter()
-    const resultsSetter = (fixtures) => {
-        const results = {}
+    const resultsSetter = (fixtures: Fixture[]) => {
+        const results = new Map()
         fixtures.forEach(fixture => {
-            results[fixture.id] = {
+            results.set(fixture.id, {
                 ftHomeScore: null,
                 ftAwayScore: null,
                 homeProgress: fixture.progressApplicable ? false: null
-            }
+            })
         })
         return results
     }
@@ -22,13 +24,13 @@ const ResultsForm = ({fixtures}) => {
 
     const save = async () => {
         setPhase(1)
-        const resultsArray = []
-        Object.entries(results).forEach((result) => {
+        const resultsArray: ResultSave[] = []
+        results.forEach((result, fixtureId) => {
             resultsArray.push({
-                id: result[0],
-                homeProgress: result[1].homeProgress,
-                ftHomeScore: Number(result[1].ftHomeScore),
-                ftAwayScore: Number(result[1].ftAwayScore)
+                id: fixtureId,
+                homeProgress: result.homeProgress,
+                ftHomeScore: Number(result.ftHomeScore),
+                ftAwayScore: Number(result.ftAwayScore)
             })
         })
         const response = await fetch(process.env.API_HOST + "/fixtures/set-results", {
@@ -51,7 +53,7 @@ const ResultsForm = ({fixtures}) => {
     }
 
     if (!fixtures.length) {
-        return "Все результаты указаны"
+        return (<>Все результаты указаны</>)
     }
 
     return (
@@ -75,12 +77,12 @@ const ResultsForm = ({fixtures}) => {
                                     required
                                     onChange={(e) => {
                                         setResults(prevState => {
-                                            const state = {...prevState}
-                                            state[fixture.id].ftHomeScore = e.target.value
+                                            const state = new Map(prevState)
+                                            state.get(fixture.id).ftHomeScore = e.target.value
                                             return state
                                         })
                                     }}
-                                    value={results[fixture.id].ftHomeScore}
+                                    value={results.get(fixture.id).ftHomeScore}
                                 />
                             </td>
                             <td>:</td>
@@ -91,12 +93,12 @@ const ResultsForm = ({fixtures}) => {
                                     required
                                     onChange={(e) => {
                                         setResults(prevState => {
-                                            const state = {...prevState}
-                                            state[fixture.id].ftAwayScore = e.target.value
+                                            const state = new Map(prevState)
+                                            state.get(fixture.id).ftAwayScore = e.target.value
                                             return state
                                         })
                                     }}
-                                    value={results[fixture.id].ftAwayScore}
+                                    value={results.get(fixture.id).ftAwayScore}
                                 />
                             </td>
                             <td>
@@ -107,12 +109,12 @@ const ResultsForm = ({fixtures}) => {
                                 className="p-2 border-2 m-2 bg-white rounded-2xl"
                                 onChange={(e) => {
                                     setResults(prevState => {
-                                        const state = {...prevState}
-                                        state[fixture.id].homeProgress = e.target.checked
+                                        const state = new Map(prevState)
+                                        state.get(fixture.id).homeProgress = e.target.checked
                                         return state
                                     })
                                 }}
-                                value={results[fixture.id].homeProgress}
+                                value={results.get(fixture.id).homeProgress}
                             /> Проход домашней команды</>)}</td>
                         </tr>
                     ))}
@@ -126,7 +128,7 @@ const ResultsForm = ({fixtures}) => {
                         setCode(e.target.value)
                     }}
                     required
-                    maxLength="6"
+                    maxLength={6}
                     value={code}
                 />
             </div>

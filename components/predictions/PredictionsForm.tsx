@@ -1,16 +1,18 @@
 import {useState} from "react";
 import { useRouter } from "next/router";
+import {Fixture} from "@/types/fixture";
+import {PredictionSave} from "@/types/prediction";
 
-const PredictionsForm = ({fixtures}) => {
+const PredictionsForm = ({fixtures}: {fixtures: Fixture[]}) => {
     const router = useRouter()
-    const predictionsSetter = (fixtures) => {
-        const predictions = {}
+    const predictionsSetter = (fixtures: Fixture[]) => {
+        const predictions = new Map()
         fixtures.forEach(fixture => {
-            predictions[fixture.id] = {
+            predictions.set(fixture.id, {
                 ftHomeScore: null,
                 ftAwayScore: null,
                 homeProgress: fixture.progressApplicable ? false: null
-            }
+            })
         })
         return predictions
     }
@@ -22,15 +24,17 @@ const PredictionsForm = ({fixtures}) => {
 
     const save = async () => {
         setPhase(1)
-        const predictionsArray = []
-        Object.entries(predictions).forEach((prediction) => {
+        const predictionsArray: PredictionSave[] = []
+        predictions.forEach((prediction, id) => {
             predictionsArray.push({
-                fixtureId: prediction[0],
-                homeProgress: prediction[1].homeProgress,
-                ftHomeScore: Number(prediction[1].ftHomeScore),
-                ftAwayScore: Number(prediction[1].ftAwayScore)
+                fixtureId: id,
+                homeProgress: prediction.homeProgress,
+                ftHomeScore: Number(prediction.ftHomeScore),
+                ftAwayScore: Number(prediction.ftAwayScore)
             })
         })
+        console.log(process.env)
+        console.log(process.env.API_HOST)
         const response = await fetch(process.env.API_HOST + "/predictions", {
             method: "post",
             headers: {
@@ -51,7 +55,7 @@ const PredictionsForm = ({fixtures}) => {
     }
 
     if (!fixtures.length) {
-        return "Нет матчей для прогнозов"
+        return (<>Нет матчей для прогнозов</>)
     }
 
     return (
@@ -75,12 +79,12 @@ const PredictionsForm = ({fixtures}) => {
                                 required
                                 onChange={(e) => {
                                     setPredictions(prevState => {
-                                        const state = {...prevState}
-                                        state[fixture.id].ftHomeScore = e.target.value
+                                        const state = new Map(prevState)
+                                        state.get(fixture.id).ftHomeScore = e.target.value
                                         return state
                                     })
                                 }}
-                                value={predictions[fixture.id].ftHomeScore}
+                                value={predictions.get(fixture.id).ftHomeScore}
                             />
                         </td>
                         <td>:</td>
@@ -91,12 +95,12 @@ const PredictionsForm = ({fixtures}) => {
                                 required
                                 onChange={(e) => {
                                     setPredictions(prevState => {
-                                        const state = {...prevState}
-                                        state[fixture.id].ftAwayScore = e.target.value
+                                        const state = new Map(prevState)
+                                        state.get(fixture.id).ftAwayScore = e.target.value
                                         return state
                                     })
                                 }}
-                                value={predictions[fixture.id].ftAwayScore}
+                                value={predictions.get(fixture.id).ftAwayScore}
                             />
                         </td>
                         <td>
@@ -107,12 +111,12 @@ const PredictionsForm = ({fixtures}) => {
                             className="p-2 border-2 m-2 bg-white rounded-2xl"
                             onChange={(e) => {
                                 setPredictions(prevState => {
-                                    const state = {...prevState}
-                                    state[fixture.id].homeProgress = e.target.checked
+                                    const state = new Map(prevState)
+                                    state.get(fixture.id).homeProgress = e.target.checked
                                     return state
                                 })
                             }}
-                            value={predictions[fixture.id].homeProgress}
+                            value={predictions.get(fixture.id).homeProgress}
                         /> Проход домашней команды</>)}</td>
                     </tr>
                 ))}
@@ -126,7 +130,7 @@ const PredictionsForm = ({fixtures}) => {
                         setCode(e.target.value)
                     }}
                     required
-                    maxLength="6"
+                    maxLength={6}
                     value={code}
                 />
             </div>

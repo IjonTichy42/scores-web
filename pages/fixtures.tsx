@@ -2,14 +2,15 @@ import FixtureBlock from "@/components/fixture/FixtureBlock";
 import {useState} from "react";
 import FixtureForm from "@/components/fixture/FixtureForm";
 import getDateString from "@/utils/getDateString";
+import {Fixture, FixtureSave, FixtureFromServer} from "@/types/fixture";
 
-function Fixtures(props) {
+function Fixtures(props: {prevFixtures: Fixture[], upcomingFixtures: Fixture[]}) {
     const {prevFixtures, upcomingFixtures} = props
-    const [addedPrevFixtures, setAddedPrevFixtures] = useState([])
-    const [addedUpcomingFixtures, setAddedUpcomingFixtures] = useState([])
+    const [addedPrevFixtures, setAddedPrevFixtures] = useState<FixtureFromServer[]>([])
+    const [addedUpcomingFixtures, setAddedUpcomingFixtures] = useState<FixtureFromServer[]>([])
     const [isAdding, setIsAdding] = useState(false)
 
-    const save = async (props) => {
+    const save = async (props: FixtureSave) => {
         const {host, away, date, league, progressApplicable, code} = props
         const response = await fetch(process.env.API_HOST + "/fixtures", {
             method: "post",
@@ -25,7 +26,7 @@ function Fixtures(props) {
                 code: Number(code)
             })
         })
-        const data = await response.json()
+        const data: {fixture: FixtureFromServer} = await response.json()
         const {fixture} = data
         const matchDate = new Date(data.fixture.startTime * 1000)
         const currentDate = new Date()
@@ -87,12 +88,12 @@ function Fixtures(props) {
     )
 }
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps() {
     const response = await fetch(process.env.API_HOST + "/fixtures")
-    const data = await response.json()
+    const data: {fixtures: FixtureFromServer[]} = await response.json()
     const {fixtures} = data
-    const prevFixtures = []
-    const upcomingFixtures = []
+    const prevFixtures: FixtureFromServer[] = []
+    const upcomingFixtures: FixtureFromServer[] = []
     const currentDate = new Date()
 
     fixtures.forEach(fixture => {

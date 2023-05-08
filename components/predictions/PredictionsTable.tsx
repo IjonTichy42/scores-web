@@ -1,6 +1,8 @@
 import competitionMapper from "@/utils/competitionMapper";
+import {Fixture} from "@/types/fixture";
+import {Prediction} from "@/types/prediction";
 
-const PredictionsTable = ({fixtures, predictions}) => (
+const PredictionsTable = ({fixtures, predictions}: {fixtures: Fixture[], predictions: Prediction[]}) => (
     <table className="border-2 border-black">
         <thead>
         <tr>

@@ -1,4 +1,4 @@
-const competitionMapper = (id) => {
+const competitionMapper = (id: number) => {
     switch (id) {
         case 1:
             return "Лига Чемпионов"

@@ -1,7 +1,9 @@
 import getDateString from "@/utils/getDateString";
 import PredictionsTable from "@/components/predictions/PredictionsTable";
+import {Fixture, FixtureFromServer} from "@/types/fixture";
+import {Prediction} from "@/types/prediction";
 
-function Predictions(props) {
+function Predictions(props: {prevFixtures: Fixture[], upcomingFixtures: Fixture[], predictions: Prediction[]}) {
     const {prevFixtures, upcomingFixtures, predictions} = props
 
     return (
@@ -18,15 +20,15 @@ function Predictions(props) {
     )
 }
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps() {
     const fixturesResponse = await fetch(process.env.API_HOST + "/fixtures")
-    const fixturesData = await fixturesResponse.json()
+    const fixturesData: {fixtures: FixtureFromServer[]} = await fixturesResponse.json()
     const {fixtures} = fixturesData
-    const prevFixtures = []
-    const upcomingFixtures = []
+    const prevFixtures: FixtureFromServer[] = []
+    const upcomingFixtures: FixtureFromServer[] = []
     const currentDate = new Date()
     const predictionsResponse = await fetch(process.env.API_HOST + "/predictions")
-    const predictionsData = await predictionsResponse.json()
+    const predictionsData: {predictions: Prediction[]} = await predictionsResponse.json()
     const {predictions} = predictionsData
 
 

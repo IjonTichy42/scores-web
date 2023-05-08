@@ -1,7 +1,8 @@
 import styles from "./FixtureBlock.module.css"
 import competitionMapper from "@/utils/competitionMapper";
+import {Fixture} from "@/types/fixture";
 
-function FixtureBlock(props) {
+function FixtureBlock(props: {fixture: Fixture}) {
     const {fixture} = props
 
     return (

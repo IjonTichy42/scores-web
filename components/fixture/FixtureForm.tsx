@@ -1,8 +1,9 @@
 import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css"
 import {useState} from "react";
+import {FixtureSave} from "@/types/fixture";
 
-function FixtureForm(props) {
+function FixtureForm(props: {hide: () => void, save: (props: FixtureSave) => {}}) {
     const {hide, save} = props
     const [isSaving, setIsSaving] = useState(false)
     const [host, setHost] = useState("")
@@ -54,7 +55,7 @@ function FixtureForm(props) {
                 <DatePicker
                     id="date"
                     className="p-2 border-2 m-2 bg-white rounded-2xl"
-                    onChange={(date) => {setDate(date)}}
+                    onChange={(date) => {setDate(date!)}}
                     showTimeInput
                     selected={date}
                     dateFormat="dd.MM.yyyy HH:mm"

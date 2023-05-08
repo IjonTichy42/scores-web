@@ -11,7 +11,7 @@ function Fixtures(props) {
 
     const save = async (props) => {
         const {host, away, date, league, progressApplicable, code} = props
-        const response = await fetch("http://127.0.0.1:8000/api/v0/fixtures", {
+        const response = await fetch(process.env.API_HOST + "/fixtures", {
             method: "post",
             headers: {
                 'Content-Type': 'application/json'
@@ -88,7 +88,7 @@ function Fixtures(props) {
 }
 
 export async function getServerSideProps(context) {
-    const response = await fetch("http://localhost:8000/api/v0/fixtures")
+    const response = await fetch(process.env.API_HOST + "/fixtures")
     const data = await response.json()
     const {fixtures} = data
     const prevFixtures = []

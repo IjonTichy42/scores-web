@@ -19,13 +19,13 @@ function Predictions(props) {
 }
 
 export async function getServerSideProps(context) {
-    const fixturesResponse = await fetch("http://localhost:8000/api/v0/fixtures")
+    const fixturesResponse = await fetch(process.env.API_HOST + "/fixtures")
     const fixturesData = await fixturesResponse.json()
     const {fixtures} = fixturesData
     const prevFixtures = []
     const upcomingFixtures = []
     const currentDate = new Date()
-    const predictionsResponse = await fetch("http://localhost:8000/api/v0/predictions")
+    const predictionsResponse = await fetch(process.env.API_HOST + "/predictions")
     const predictionsData = await predictionsResponse.json()
     const {predictions} = predictionsData
 

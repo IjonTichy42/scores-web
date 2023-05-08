@@ -10,7 +10,7 @@ const AddResults = (props) => {
 }
 
 export async function getServerSideProps(context) {
-    const response = await fetch("http://localhost:8000/api/v0/fixtures/without-results")
+    const response = await fetch(process.env.API_HOST + "/fixtures/without-results")
     const data = await response.json()
     const {fixtures} = data
 

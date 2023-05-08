@@ -59,7 +59,7 @@ function Home(props) {
 }
 
 export async function getStaticProps(context) {
-    const response = await fetch("http://localhost:8000/api/v0/users")
+    const response = await fetch(process.env.API_HOST + "/users")
     const data = await response.json()
 
     return {

@@ -31,7 +31,7 @@ const PredictionsForm = ({fixtures}) => {
                 ftAwayScore: Number(prediction[1].ftAwayScore)
             })
         })
-        const response = await fetch("http://127.0.0.1:8000/api/v0/predictions", {
+        const response = await fetch(process.env.API_HOST + "/predictions", {
             method: "post",
             headers: {
                 'Content-Type': 'application/json'

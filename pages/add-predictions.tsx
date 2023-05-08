@@ -10,7 +10,7 @@ const AddPredictions = (props) => {
 }
 
 export async function getServerSideProps(context) {
-    const response = await fetch("http://localhost:8000/api/v0/fixtures/future")
+    const response = await fetch(process.env.API_HOST + "/fixtures/future")
     const data = await response.json()
     const {fixtures} = data
 

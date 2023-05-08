@@ -3,7 +3,7 @@ import Link from 'next/link'
 function MainNavigation() {
 
   return (
-      <nav className="fixed top-0 left-0 w-full bg-gray-300 dark:bg-gray-800 p-8 z-10">
+      <nav className="fixed top-0 left-0 w-full bg-gray-300 dark:bg-gray-800 p-2 md:p-8 z-10 md:block overflow-x-auto">
         <ul className="flex">
           <li className="mr-8">
             <Link href='/'>Таблица</Link>

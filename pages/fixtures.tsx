@@ -50,9 +50,9 @@ function Fixtures(props: {prevFixtures: Fixture[], upcomingFixtures: Fixture[]})
     const hideForm = () => setIsAdding(false)
 
     return (
-        <main className="min-h-screen p-24 flex flex-col items-center">
+        <main className="min-h-screen p-2 pt-24 md:p-24 flex flex-col items-center">
             <h1 className="font-bold font-2xl text-center mb-4">Будущие Игры</h1>
-            <div className="grid grid-cols-3">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             {
                 addedUpcomingFixtures.map((fixture) => <FixtureBlock key={fixture.id} fixture={fixture} />)
             }
@@ -74,7 +74,7 @@ function Fixtures(props: {prevFixtures: Fixture[], upcomingFixtures: Fixture[]})
             {!!prevFixtures && (
                 <>
                     <h1 className="font-bold font-2xl text-center mb-4">Прошедшие Игры</h1>
-                    <div className="grid grid-cols-3">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                         {
                             addedPrevFixtures.map((fixture) => <FixtureBlock key={fixture.id} fixture={fixture} />)
                         }

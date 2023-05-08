@@ -4,9 +4,9 @@ function Home(props: {users: User[]}) {
     const {users} = props
 
     return (
-        <main className="min-h-screen p-24 flex flex-col items-center">
+        <main className="min-h-screen p-2 pt-24 md:p-24 flex flex-col items-center">
             <h1 className="font-bold font-2xl text-center mb-4">Таблица</h1>
-            <table className="w-1/2">
+            <table className="md:w-1/2 w-full">
                 <thead>
                     <tr>
                         <th className="w-1/6 border-2 border-blue-950">

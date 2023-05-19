@@ -58,10 +58,11 @@ const PredictionsTable = ({fixtures, predictions}: {fixtures: Fixture[], predict
                         ))}
                     </td>
                     <td className="border-2 border-black dark:border-gray-300 p-2">
-                        {fixture.ftHomeScore ?
-                            (<>{fixture.ftHomeScore}:{fixture.ftAwayScore} {fixture.progressApplicable && (fixture.homeProgress ? "проход " + fixture.homeTeam : "проход " + fixture.awayTeam)}</>) :
-                            "-"
+                        {typeof fixture.ftHomeScore === "number" ?
+                            (<>{fixture.ftHomeScore}:{fixture.ftAwayScore} {fixture.progressApplicable && (fixture.homeProgress ? "проход " + fixture.homeTeam : "проход " + fixture.awayTeam)}</>)
+                            : '-'
                         }
+                        {}
                     </td>
                 </tr>
             ))

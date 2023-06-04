@@ -22,7 +22,7 @@ function FixtureForm(props: {hide: () => void, save: (props: FixtureSave) => {}}
 
     return (
         <form
-            className="p-4 m-8 bg-white rounded-2xl"
+            className="p-4 m-8 bg-white dark:bg-gray-800 rounded-2xl"
             onReset={e => {
                 e.preventDefault()
                 hide()
@@ -35,7 +35,7 @@ function FixtureForm(props: {hide: () => void, save: (props: FixtureSave) => {}}
                 >Хозяева</label>
                 <input
                     autoFocus
-                    className="p-2 m-2 border-2 bg-white rounded-2xl"
+                    className="p-2 m-2 border-2 bg-white rounded-2xl dark:text-gray-800"
                     id="host"
                     value={host}
                     onChange={e => setHost(e.currentTarget.value)}
@@ -44,7 +44,7 @@ function FixtureForm(props: {hide: () => void, save: (props: FixtureSave) => {}}
             <div className="flex justify-between items-center">
                 <label htmlFor="away">Гости</label>
                 <input
-                    className="p-2 m-2 border-2 bg-white rounded-2xl"
+                    className="p-2 m-2 border-2 bg-white rounded-2xl dark:text-gray-800"
                     id="away"
                     value={away}
                     onChange={e => setAway(e.currentTarget.value)}
@@ -54,7 +54,7 @@ function FixtureForm(props: {hide: () => void, save: (props: FixtureSave) => {}}
                 <label htmlFor="date">Время начала</label>
                 <DatePicker
                     id="date"
-                    className="p-2 border-2 m-2 bg-white rounded-2xl"
+                    className="p-2 border-2 m-2 bg-white rounded-2xl dark:text-gray-800"
                     onChange={(date) => {setDate(date!)}}
                     showTimeInput
                     selected={date}
@@ -64,7 +64,7 @@ function FixtureForm(props: {hide: () => void, save: (props: FixtureSave) => {}}
             <div className="flex justify-between items-center">
                 <label htmlFor="league">Турнир</label>
                 <select
-                    className="p-2 m-2 border-2 bg-white rounded-2xl"
+                    className="p-2 m-2 border-2 bg-white rounded-2xl dark:text-gray-800"
                     id="league"
                     value={league}
                     onChange={e => setLeague(e.currentTarget.value)}
@@ -88,7 +88,7 @@ function FixtureForm(props: {hide: () => void, save: (props: FixtureSave) => {}}
                 </label>
                 <input
                     id="progressApplicable"
-                    className="p-2 m-2 bg-white rounded-2xl"
+                    className="p-2 m-2 bg-white dark:text-gray-800 rounded-2xl"
                     type="checkbox"
                     checked={progressApplicable}
                     onChange={e => setProgressApplicable(e.currentTarget.checked)}
@@ -99,7 +99,7 @@ function FixtureForm(props: {hide: () => void, save: (props: FixtureSave) => {}}
                     htmlFor="code"
                 >Код</label>
                 <input
-                    className="p-2 m-2 border-2 bg-white rounded-2xl"
+                    className="p-2 m-2 border-2 bg-white dark:text-gray-800 rounded-2xl"
                     id="code"
                     value={code}
                     onChange={e => setCode(e.currentTarget.value)}
@@ -109,14 +109,14 @@ function FixtureForm(props: {hide: () => void, save: (props: FixtureSave) => {}}
                 className="flex justify-between"
             >
                 <button
-                    className="p-4 border-2 bg-red-500 text-white rounded-2xl"
+                    className="p-4 border-2 bg-red-500 dark:bg-red-800 border-red-800 text-white rounded-2xl"
                     type="reset"
                     disabled={isSaving}
                 >
                     Отмена
                 </button>
                 <button
-                    className="p-4 border-2 bg-white rounded-2xl"
+                    className="p-4 border-2 bg-white dark:text-gray-800 rounded-2xl"
                     type="submit"
                     disabled={isSaving}
                 >
